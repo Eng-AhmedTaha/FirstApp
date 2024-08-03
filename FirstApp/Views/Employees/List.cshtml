@@ -1,0 +1,123 @@
+﻿
+@model List<EmployeeModel>
+
+<h1>
+    Employees data
+</h1>
+
+<h2>
+    @string.Format("{0}  :  {1}", "Department Name", ViewBag.Department);
+
+
+</h2>
+
+<div>
+    @ViewData["Salary"]=4000;
+</div>
+
+<div>
+    <ul>
+        <li>
+            @Model[0].Name
+        </li>
+        <li>
+            @Model[0].Description
+        </li>
+        <li>
+            @Model[0].Title
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    @foreach (var employee in Model)
+    {
+        <div class="column">
+            <div class="card">
+                <img src="~/Images/@employee.ImageName" alt="Jane" style="width:100%; height:200px;">
+                <div class="container">
+                    <h2>@employee.Name</h2>
+                    <p class="title">@employee.Title</p>
+                    @if (employee.Title == "Developer")
+                    {
+                        <div>
+                            <button>Go to Developer Details</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>@employee.Description</p>
+                    }
+
+                    <p>example@example.com</p>
+
+                            @{
+                    var parms = new Dictionary<string, string>
+                                {
+                                    { "id",@employee.Id.ToString() },
+                                    { "name", @employee.Name }
+                                };
+                            }
+
+                    <p><a asp-controller="Employees" asp-action="Details" asp-all-route-data="parms"  class="button">Contact</a></p>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @*    <div class="column">
+    <div class="card">
+    <img src="~/Images/2.jpg" alt="Mike" style="width:100%; height:200px;">
+    <div class="container">
+    <h2>@ViewBag.SalesMan.Name</h2>
+    <p class="title">Art Director</p>
+    <p>@ViewBag.SalesMan.Description</p>
+    <p>example@example.com</p>
+    <p><a href="/Employees/Details" class="button">Contact</a></p>
+    </div>
+    </div>
+    </div>*@
+
+    <div class="column">
+        <div class="card">
+            <img src="~/Images/3.jpg" alt="John" style="width:100%; height:200px;`">
+            <div class="container">
+                <h2>John Doe</h2>
+                <p class="title">Designer</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>example@example.com</p>
+                <p><a href="/Employees/Details" class="button">Contact</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Desciption
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in ViewBag.SalesMan)
+            {
+                <tr>
+                    <td>@employee.Name</td>
+                    <td>@employee.Title</td>
+                    <td>@employee.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
